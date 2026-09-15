@@ -1,0 +1,26 @@
+{
+  "expo": {
+    "name": "吃点啥",
+    "slug": "chidiansha",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "scheme": "chidiansha",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.kayceeiii.chidiansha"
+    },
+    "android": { "package": "com.kayceeiii.chidiansha" },
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "选择菜品照片，制作你的专属餐盘。",
+          "cameraPermission": false,
+          "microphonePermission": false
+        }
+      ]
+    ],
+    "web": { "name": "吃点啥 · 我的生活餐桌", "bundler": "metro" }
+  }
+}

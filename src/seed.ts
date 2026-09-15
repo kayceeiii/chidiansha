@@ -1,0 +1,183 @@
+import { Dish, State, localDate, uid } from "./domain";
+const dish = (
+  id: string,
+  name: string,
+  emoji: string,
+  color: string,
+  minutes: number,
+  tags: string[],
+  ingredients: Dish["ingredients"],
+  steps: string[],
+  wish = false,
+): Dish => ({
+  id,
+  name,
+  emoji,
+  color,
+  minutes,
+  tags,
+  ingredients,
+  steps,
+  wish,
+  frame: "#eee5ce",
+  note: "",
+});
+export const seedDishes: Dish[] = [
+  dish(
+    "tomato-eggs",
+    "番茄炒蛋",
+    "🍅",
+    "#F6E5D5",
+    12,
+    ["家常", "清淡"],
+    [
+      { name: "番茄", quantity: 150, unit: "g" },
+      { name: "鸡蛋", quantity: 2, unit: "个" },
+    ],
+    [
+      "番茄洗净切块，鸡蛋打散，加少许盐。",
+      "热锅少油，炒熟鸡蛋后盛出。",
+      "炒软番茄，加入鸡蛋翻匀，调味出锅。",
+    ],
+  ),
+  dish(
+    "broccoli-shrimp",
+    "西兰花炒虾仁",
+    "🥦",
+    "#E5EBD8",
+    18,
+    ["清淡", "高蛋白"],
+    [
+      { name: "西兰花", quantity: 150, unit: "g" },
+      { name: "虾仁", quantity: 100, unit: "g" },
+    ],
+    [
+      "虾仁解冻，西兰花切小朵洗净。",
+      "西兰花焯水，捞出沥干。",
+      "将虾仁炒至熟透，加入西兰花翻炒调味。",
+    ],
+  ),
+  dish(
+    "potato-beef",
+    "土豆炖牛肉",
+    "🥔",
+    "#EFDFCC",
+    55,
+    ["家常", "浓郁"],
+    [
+      { name: "土豆", quantity: 150, unit: "g" },
+      { name: "牛肉", quantity: 150, unit: "g" },
+    ],
+    [
+      "牛肉切块焯水，土豆去皮切块。",
+      "煸香牛肉，加入酱油和适量水。",
+      "炖至牛肉软烂，加土豆炖熟后收汁。",
+    ],
+  ),
+  dish(
+    "mushroom-noodles",
+    "香菇青菜面",
+    "🍜",
+    "#F1E9D7",
+    15,
+    ["清淡", "素食"],
+    [
+      { name: "面条", quantity: 100, unit: "g" },
+      { name: "香菇", quantity: 50, unit: "g" },
+      { name: "青菜", quantity: 100, unit: "g" },
+    ],
+    [
+      "香菇切片，青菜洗净。",
+      "香菇炒香，加水煮开，下入面条。",
+      "面条将熟时加入青菜，煮熟调味。",
+    ],
+  ),
+  dish(
+    "egg-toast",
+    "鸡蛋牛油果吐司",
+    "🥑",
+    "#E7EAD5",
+    10,
+    ["早餐", "清淡"],
+    [
+      { name: "吐司", quantity: 2, unit: "个" },
+      { name: "鸡蛋", quantity: 1, unit: "个" },
+      { name: "牛油果", quantity: 1, unit: "个" },
+    ],
+    [
+      "将吐司烤至表面微脆。",
+      "鸡蛋煎至熟透，牛油果去皮切片。",
+      "依次放上牛油果和煎蛋，撒少许黑胡椒。",
+    ],
+  ),
+  dish(
+    "mapo-tofu",
+    "麻婆豆腐",
+    "🌶️",
+    "#F3DFD1",
+    20,
+    ["香辣", "家常"],
+    [
+      { name: "豆腐", quantity: 200, unit: "g" },
+      { name: "猪肉末", quantity: 50, unit: "g" },
+    ],
+    [
+      "豆腐切块，焯水沥干。",
+      "炒熟肉末，加豆瓣酱炒香。",
+      "加少量水和豆腐煮透，勾薄芡，按口味加入花椒粉。",
+    ],
+  ),
+  dish(
+    "pumpkin-soup",
+    "南瓜奶油浓汤",
+    "🎃",
+    "#F4E5C8",
+    30,
+    ["清淡", "浓郁"],
+    [
+      { name: "南瓜", quantity: 200, unit: "g" },
+      { name: "牛奶", quantity: 150, unit: "ml" },
+    ],
+    [
+      "南瓜去皮切块蒸熟。",
+      "加牛奶打成细腻浓汤。",
+      "小火加热，按口味加入盐或黑胡椒。",
+    ],
+    true,
+  ),
+];
+export function initialState(): State {
+  return {
+    version: 1,
+    dishes: seedDishes,
+    stock: [
+      {
+        id: uid(),
+        name: "番茄",
+        quantity: 400,
+        unit: "g",
+        expires: localDate(new Date(Date.now() + 2 * 86400000)),
+      },
+      {
+        id: uid(),
+        name: "鸡蛋",
+        quantity: 6,
+        unit: "个",
+        expires: localDate(new Date(Date.now() + 10 * 86400000)),
+      },
+      {
+        id: uid(),
+        name: "西兰花",
+        quantity: 200,
+        unit: "g",
+        expires: localDate(new Date(Date.now() + 3 * 86400000)),
+      },
+    ],
+    picks: [],
+    meals: [],
+    purchases: [],
+    tastes: ["清淡", "家常"],
+    avoid: "",
+    memberId: uid(),
+  };
+}
